@@ -11,6 +11,7 @@ public class MovieCharactersApiApplication {
 		SpringApplication.run(MovieCharactersApiApplication.class, args);
 		//Test, ser dere dette her?
 		// Ja :)
+		//hahaha
 	}
 
 }
