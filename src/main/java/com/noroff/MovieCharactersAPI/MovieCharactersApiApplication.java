@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MovieCharactersApiApplication {
 
 	public static void main(String[] args) {
+		//Hello from Git!
 		SpringApplication.run(MovieCharactersApiApplication.class, args);
 		//Test, ser dere dette her?
 	}
