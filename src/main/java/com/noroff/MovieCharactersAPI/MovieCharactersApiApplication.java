@@ -10,6 +10,7 @@ public class MovieCharactersApiApplication {
 		//Hello from Git!
 		SpringApplication.run(MovieCharactersApiApplication.class, args);
 		//Test, ser dere dette her?
+		// Ja :)
 	}
 
 }
