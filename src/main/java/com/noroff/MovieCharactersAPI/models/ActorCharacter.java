@@ -35,7 +35,7 @@ public class ActorCharacter {
         this.alias = alias;
         this.gender = gender;
         this.picture = picture;
-        this.franchise = franchise
+        this.franchise = franchise;
     }
 
     public long getId() {
