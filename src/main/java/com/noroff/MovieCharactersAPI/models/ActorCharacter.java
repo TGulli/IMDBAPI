@@ -23,7 +23,6 @@ public class ActorCharacter {
     private String picture;
 
     @ManyToOne
-    @JoinColumn(name = "characters")
     private Franchise franchise;
 
 

@@ -1,8 +1,11 @@
 package com.noroff.MovieCharactersAPI.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Franchise")
@@ -15,8 +18,8 @@ public class Franchise {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "franchise")
-    private List<ActorCharacter> characters; // TODO: Replace String with movie class
+    @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL)
+    private Set<ActorCharacter> characters; // TODO: Replace String with movie class
 
     public Franchise() {
 
@@ -25,13 +28,9 @@ public class Franchise {
     public Franchise(String name, String description) {
         this.name = name;
         this.description = description;
-        this.characters = characters;
     }
-    public Franchise(long franchiseId, String name, String description) {
-        this.franchiseId = franchiseId;
-        this.name = name;
-        this.description = description;
-    }
+
+
 
     public long getFranchiseId() {
         return franchiseId;
@@ -41,11 +40,14 @@ public class Franchise {
         this.franchiseId = franchiseId;
     }
 
-    public List<ActorCharacter> getCharacters() {
-        return characters;
+    public List<String> getCharacterNames(){
+        return characters.stream()
+                .map(ActorCharacter::getName)
+                .collect(Collectors.toList());
     }
-
-    public void setCharacters(List<ActorCharacter> characters) {
+    
+    @JsonIgnore
+    public void setCharacters(Set<ActorCharacter> characters) {
         this.characters = characters;
     }
 

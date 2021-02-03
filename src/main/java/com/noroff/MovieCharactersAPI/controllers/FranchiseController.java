@@ -6,6 +6,7 @@ import com.noroff.MovieCharactersAPI.models.ActorCharacter;
 import com.noroff.MovieCharactersAPI.models.Franchise;
 import com.noroff.MovieCharactersAPI.repositories.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,14 +33,17 @@ public class FranchiseController {
     }
 
 
-    @PutMapping("/franchise/{franchiseId}/add-character/{characterId}")
-    public ResponseEntity<Franchise> addCharacterToFranchise(@PathVariable("franchiseId") long franchiseId, @PathVariable("characterId") long characterId) throws NoItemFoundException{
-        ActorCharacter actorCharacter = this.characterRepository.findById(characterId).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
+    @PutMapping("/franchise/{franchiseId}/character/{charid}")
+    public HttpStatus addCharacterToFranchise(@PathVariable("franchiseId") long franchiseId, @PathVariable("charid") long charid) throws NoItemFoundException{
+        ActorCharacter actorCharacter = this.characterRepository.findById(charid).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
+
+        //Ferdig objekt ikkje populert
         Franchise franchise = this.franchiseRepo.findById(franchiseId).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
-
         franchise.getCharacters().add(actorCharacter);
+        actorCharacter.setFranchise(franchise);
+        characterRepository.save(actorCharacter);
 
-        return ResponseEntity.ok().body(this.franchiseRepo.save(franchise));
+        return HttpStatus.ACCEPTED;
     }
 
 
