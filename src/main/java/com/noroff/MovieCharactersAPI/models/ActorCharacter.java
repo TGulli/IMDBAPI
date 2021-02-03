@@ -22,16 +22,20 @@ public class ActorCharacter {
     @Column(name = "Picture")
     private String picture;
 
+    @Column(name = "MovieId")
+    private Franchise franchise;
+
     /*@ManyToMany(mappedBy = characters)
     private Set<Movie> movies;*/
 
     public ActorCharacter() {}
 
-    public ActorCharacter(String name, String alias, String gender, String picture) {
+    public ActorCharacter(String name, String alias, String gender, String picture, Franchise franchise) {
         this.name = name;
         this.alias = alias;
         this.gender = gender;
         this.picture = picture;
+        this.franchise = franchise
     }
 
     public long getId() {
@@ -72,5 +76,13 @@ public class ActorCharacter {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public Franchise getFranchise() {
+        return franchise;
+    }
+
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
     }
 }
