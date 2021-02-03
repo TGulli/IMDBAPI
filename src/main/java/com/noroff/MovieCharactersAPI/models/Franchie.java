@@ -26,6 +26,11 @@ public class Franchie {
         this.description = description;
         this.movies = movies;
     }
+    public Franchie(long franchie_id, String name, String description) {
+        this.franchie_id=franchie_id;
+        this.name = name;
+        this.description = description;
+    }
 
     public long getFranchie_id() {
         return franchie_id;
