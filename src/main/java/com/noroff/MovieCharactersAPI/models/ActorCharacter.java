@@ -22,11 +22,10 @@ public class ActorCharacter {
     @Column(name = "Picture")
     private String picture;
 
-    @Column(name = "MovieId")
+    @ManyToOne
+    @JoinColumn(name = "characters")
     private Franchise franchise;
 
-    /*@ManyToMany(mappedBy = characters)
-    private Set<Movie> movies;*/
 
     public ActorCharacter() {}
 
