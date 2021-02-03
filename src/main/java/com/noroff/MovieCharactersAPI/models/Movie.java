@@ -29,8 +29,6 @@ public class Movie {
     @Column(name = "trailer")
     private String trailer;
 
-    @
-
     public Movie() {
     }
 
