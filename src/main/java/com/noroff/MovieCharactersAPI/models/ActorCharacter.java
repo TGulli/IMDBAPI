@@ -1,7 +1,11 @@
 package com.noroff.MovieCharactersAPI.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Character")
@@ -40,6 +44,13 @@ public class ActorCharacter {
         this.gender = gender;
         this.picture = picture;
     }
+
+    public List<String> getCharacterNames(){
+        return movies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+    }
+
 
     public long getId() {
         return character_id;
@@ -81,6 +92,7 @@ public class ActorCharacter {
         this.picture = picture;
     }
 
+    @JsonIgnore
     public Set<Movie> getMovies() {
         return movies;
     }

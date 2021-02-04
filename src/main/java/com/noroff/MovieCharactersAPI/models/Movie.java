@@ -1,7 +1,11 @@
 package com.noroff.MovieCharactersAPI.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Movie")
@@ -49,6 +53,15 @@ public class Movie {
         this.trailer = trailer;
     }
 
+
+    public List<String> getCharacterNames(){
+        return characters.stream()
+                .map(ActorCharacter::getName)
+                .collect(Collectors.toList());
+    }
+
+
+    @JsonIgnore
     public Set<ActorCharacter> getCharacters() {
         return characters;
     }
@@ -57,6 +70,7 @@ public class Movie {
         this.characters = characters;
     }
 
+    @JsonIgnore
     public Franchise getFranchise() {
         return franchise;
     }
