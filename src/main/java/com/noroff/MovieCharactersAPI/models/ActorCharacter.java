@@ -1,6 +1,7 @@
 package com.noroff.MovieCharactersAPI.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Character")
@@ -8,7 +9,7 @@ public class ActorCharacter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long character_id;
 
     @Column(name = "FullName")
     private String name;
@@ -22,26 +23,30 @@ public class ActorCharacter {
     @Column(name = "Picture")
     private String picture;
 
-    @ManyToOne
-    private Franchise franchise;
+    @ManyToMany
+    @JoinTable(
+            name = "movie_characters",
+            joinColumns = {@JoinColumn(name = "character_id")},
+            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
+    )
+    private Set<Movie> movies;
 
 
     public ActorCharacter() {}
 
-    public ActorCharacter(String name, String alias, String gender, String picture, Franchise franchise) {
+    public ActorCharacter(String name, String alias, String gender, String picture) {
         this.name = name;
         this.alias = alias;
         this.gender = gender;
         this.picture = picture;
-        this.franchise = franchise;
     }
 
     public long getId() {
-        return id;
+        return character_id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long character_id) {
+        this.character_id = character_id;
     }
 
     public String getName() {
@@ -76,11 +81,11 @@ public class ActorCharacter {
         this.picture = picture;
     }
 
-    public Franchise getFranchise() {
-        return franchise;
+    public Set<Movie> getMovies() {
+        return movies;
     }
 
-    public void setFranchise(Franchise franchise) {
-        this.franchise = franchise;
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 }

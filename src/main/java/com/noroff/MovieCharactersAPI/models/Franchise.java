@@ -1,11 +1,7 @@
 package com.noroff.MovieCharactersAPI.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Franchise")
@@ -13,13 +9,13 @@ public class Franchise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long franchiseId;
+    private long franchise_id;
 
     private String name;
     private String description;
 
     @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL)
-    private Set<ActorCharacter> characters; // TODO: Replace String with movie class
+    private Set<Movie> movies;
 
     public Franchise() {
 
@@ -30,25 +26,12 @@ public class Franchise {
         this.description = description;
     }
 
-
-
-    public long getFranchiseId() {
-        return franchiseId;
+    public long getFranchise_id() {
+        return franchise_id;
     }
 
-    public void setFranchiseId(long franchiseId) {
-        this.franchiseId = franchiseId;
-    }
-
-    public List<String> getCharacterNames(){
-        return characters.stream()
-                .map(ActorCharacter::getName)
-                .collect(Collectors.toList());
-    }
-    
-    @JsonIgnore
-    public void setCharacters(Set<ActorCharacter> characters) {
-        this.characters = characters;
+    public void setFranchise_id(long franchiseId) {
+        this.franchise_id = franchiseId;
     }
 
     public String getName() {
@@ -65,5 +48,13 @@ public class Franchise {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 }

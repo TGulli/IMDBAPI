@@ -1,6 +1,7 @@
 package com.noroff.MovieCharactersAPI.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Movie")
@@ -29,6 +30,13 @@ public class Movie {
     @Column(name = "trailer")
     private String trailer;
 
+    @ManyToMany(mappedBy = "movies")
+    private Set<ActorCharacter> characters;
+
+    @ManyToOne
+    @JoinColumn(name = "franchise_id")
+    private Franchise franchise;
+
     public Movie() {
     }
 
@@ -39,6 +47,22 @@ public class Movie {
         this.director = director;
         this.picture = picture;
         this.trailer = trailer;
+    }
+
+    public Set<ActorCharacter> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(Set<ActorCharacter> characters) {
+        this.characters = characters;
+    }
+
+    public Franchise getFranchise() {
+        return franchise;
+    }
+
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
     }
 
     public long getMovie_id() {
