@@ -1,24 +1,19 @@
 package com.noroff.MovieCharactersAPI.controllers;
 
 import com.noroff.MovieCharactersAPI.exceptions.NoItemFoundException;
-import com.noroff.MovieCharactersAPI.franchiesRepository.FranchiseRepository;
+import com.noroff.MovieCharactersAPI.repositories.FranchiseRepository;
 import com.noroff.MovieCharactersAPI.models.ActorCharacter;
 import com.noroff.MovieCharactersAPI.models.Franchise;
-import com.noroff.MovieCharactersAPI.models.Movie;
 import com.noroff.MovieCharactersAPI.repositories.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import java.util.List;
-import java.util.Set;
 
 @RestController
-@RequestMapping(value = "api/franchies")
+@CrossOrigin(origins = "*")
+@RequestMapping(value = "api/v1/franchise")
 public class FranchiseController {
 
     @Autowired
@@ -29,7 +24,7 @@ public class FranchiseController {
 
     @GetMapping
     public List<Franchise> getAll(){
-            return franchiseRepo.findAll();
+        return franchiseRepo.findAll();
     }
 
     @PostMapping
