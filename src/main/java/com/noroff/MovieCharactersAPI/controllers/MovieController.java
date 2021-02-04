@@ -35,9 +35,10 @@ public class MovieController {
         return ResponseEntity.ok().body(movie);
     }
 
-    /*
+
     @GetMapping("/franchise/{franchiseid}")
     public ResponseEntity<Set<Movie>> getMovieByFranchise(@PathVariable(value = "franchiseid") long franchiseid) throws NoItemFoundException {
-        Set<Movie> movies = movieRepository.findAllById(movieRepository.findAll()).orElseThrow(() -> new NoItemFoundException("No franchise by id " + franchiseid));
-    }*/
+        Set<Movie> movies = movieRepository.findMovieByFranchise(franchiseid);
+        return ResponseEntity.ok().body(movies);
+    }
 }

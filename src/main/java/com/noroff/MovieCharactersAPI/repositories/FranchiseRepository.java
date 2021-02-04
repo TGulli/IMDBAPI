@@ -10,6 +10,5 @@ import java.util.Set;
 
 @Repository
 public interface FranchiseRepository extends JpaRepository<Franchise,Long> {
-    //Set<Movie> findByFranchiseId(long franchiseId);
 
 }
