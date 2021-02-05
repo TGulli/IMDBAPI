@@ -53,7 +53,7 @@ public class MovieController {
     /**
      * PROVING MANY TO MANY
      */
-    
+
     @PutMapping("/playingaround/{charid}/m/{movid}")
     public HttpStatus testingOutRestFunctionality(@PathVariable("charid") long characterId, @PathVariable("movid") long movieid) throws NoItemFoundException{
         Movie movie = movieRepository.findById(movieid).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
