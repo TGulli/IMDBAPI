@@ -54,6 +54,8 @@ public class FranchiseController {
         Franchise franchise = this.franchiseRepo.findById(franchiseId).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
 
 
+        //HEIFRAGIT
+
         franchise.getMovies().add(movie);
         movie.setFranchise(franchise);
 
