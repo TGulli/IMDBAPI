@@ -27,6 +27,9 @@ public class MovieController {
     @Autowired
     CharacterRepository characterRepository;
 
+    @Autowired
+    FranchiseRepository franchiseRepository;
+
     @GetMapping
     public List<Movie> getAllMovies() {
         return this.movieRepository.findAll();
@@ -44,11 +47,36 @@ public class MovieController {
     }
 
 
+    /**
+     * SPECIAL QUERY 1:
+     */
+
     @GetMapping("/franchise/{franchiseid}")
-    public ResponseEntity<Set<Movie>> getMovieByFranchise(@PathVariable(value = "franchiseid") long franchiseid) throws NoItemFoundException {
-        Set<Movie> movies = movieRepository.findMovieByFranchise(franchiseid);
-        return ResponseEntity.ok().body(movies);
+    public ResponseEntity<List<Movie>> getMovieByFranchise(@PathVariable(value = "franchiseid") long franchiseid) throws NoItemFoundException {
+        Franchise franchise = franchiseRepository.findById(franchiseid).orElseThrow(() -> new NoItemFoundException("AHHHHHH"));
+
+        List<Movie> kafaen = movieRepository.findMovieByFranchise(franchise);
+        return ResponseEntity.ok().body(kafaen);
     }
+
+    /**
+     * SPECIAL QUERY 2:
+     */
+
+    @GetMapping("/all-characters/{movieid}")
+    public ResponseEntity<List<ActorCharacter>> extractCharactersFromMovie(@PathVariable("movieid") long movieid) throws NoItemFoundException {
+        Movie movie = movieRepository.findById(movieid).orElseThrow(() -> new NoItemFoundException("AHHHHHH"));
+
+        //alle movies + alle characters -> filter lister -> return treff
+
+        //List<ActorCharacter> output = characterRepository.findActorCharactersByMovie(movie);
+
+
+        return ResponseEntity.ok().body(output);
+
+    }
+
+
 
     /**
      * PROVING MANY TO MANY

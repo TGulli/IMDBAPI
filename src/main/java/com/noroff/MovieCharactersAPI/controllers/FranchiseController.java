@@ -58,7 +58,7 @@ public class FranchiseController {
         movie.setFranchise(franchise);
 
         movieRepository.save(movie);
-        
+
         return ResponseEntity.ok().body(movie);
     }
 
