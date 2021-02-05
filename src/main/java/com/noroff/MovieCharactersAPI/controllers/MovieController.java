@@ -69,7 +69,10 @@ public class MovieController {
 
         //alle movies + alle characters -> filter lister -> return treff
 
-        //List<ActorCharacter> output = characterRepository.findActorCharactersByMovie(movie);
+        List<ActorCharacter> output = characterRepository.findActorCharacterById(movie.getMovie_id());
+        for (ActorCharacter c : output){
+            System.out.println(c.getName());
+        }
 
 
         return ResponseEntity.ok().body(output);

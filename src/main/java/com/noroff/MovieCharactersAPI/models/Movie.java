@@ -37,7 +37,7 @@ public class Movie {
     @ManyToMany(mappedBy = "movies")
     private Set<ActorCharacter> characters;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "franchise_id")
     private Franchise franchise;
 
