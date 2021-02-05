@@ -45,7 +45,9 @@ public class ActorCharacter {
         this.picture = picture;
     }
 
-    public List<String> getCharacterNames(){
+
+    //Map the entire object maybe
+    public List<String> getMovieNames(){
         return movies.stream()
                 .map(Movie::getTitle)
                 .collect(Collectors.toList());

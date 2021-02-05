@@ -54,9 +54,8 @@ public class MovieController {
     @GetMapping("/franchise/{franchiseid}")
     public ResponseEntity<List<Movie>> getMovieByFranchise(@PathVariable(value = "franchiseid") long franchiseid) throws NoItemFoundException {
         Franchise franchise = franchiseRepository.findById(franchiseid).orElseThrow(() -> new NoItemFoundException("AHHHHHH"));
-
-        List<Movie> kafaen = movieRepository.findMovieByFranchise(franchise);
-        return ResponseEntity.ok().body(kafaen);
+        List<Movie> movieList = movieRepository.findMovieByFranchise(franchise);
+        return ResponseEntity.ok().body(movieList);
     }
 
     /**
@@ -64,20 +63,35 @@ public class MovieController {
      */
 
     @GetMapping("/all-characters/{movieid}")
-    public ResponseEntity<List<ActorCharacter>> extractCharactersFromMovie(@PathVariable("movieid") long movieid) throws NoItemFoundException {
+    public ResponseEntity<Set<ActorCharacter>> extractCharactersFromMovie(@PathVariable("movieid") long movieid) throws NoItemFoundException {
         Movie movie = movieRepository.findById(movieid).orElseThrow(() -> new NoItemFoundException("AHHHHHH"));
-
-        //alle movies + alle characters -> filter lister -> return treff
-
-        List<ActorCharacter> output = characterRepository.findActorCharacterById(movie.getMovie_id());
-        for (ActorCharacter c : output){
-            System.out.println(c.getName());
-        }
-
-
+        Set<ActorCharacter> output = characterRepository.findActorCharacterById(movie.getMovie_id());
         return ResponseEntity.ok().body(output);
 
     }
+
+    /**
+     * SPECIAL QUERY 3:
+     */
+
+    @GetMapping("/get-characters-franchise/{id}")
+    public ResponseEntity<Set<ActorCharacter>> extractCharactersFromFranchise(@PathVariable("id") long franchiseId) throws NoItemFoundException {
+        Franchise franchise = franchiseRepository.findById(franchiseId).orElseThrow(() -> new NoItemFoundException("NOOOOO"));
+
+        Set<ActorCharacter> b = new HashSet<>();
+
+        for (Movie m : movieRepository.findMovieByFranchise(franchise)){
+            for (ActorCharacter a : characterRepository.findActorCharacterById(m.getMovie_id())) {
+                b.add(a);
+            }
+        }
+
+
+        return ResponseEntity.ok().body(b);
+
+    }
+
+
 
 
 

@@ -11,5 +11,5 @@ import java.util.Set;
 
 public interface CharacterRepository extends JpaRepository<ActorCharacter, Long> {
     @Query("SELECT m.characters FROM Movie m WHERE m.movie_id = :id")
-    List<ActorCharacter> findActorCharacterById(@Param("id") long id);
+    Set<ActorCharacter> findActorCharacterById(@Param("id") long id);
 }
