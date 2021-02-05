@@ -14,7 +14,7 @@ public class Franchise {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "franchise")
     private Set<Movie> movies;
 
     public Franchise() {

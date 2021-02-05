@@ -48,9 +48,12 @@ public class ActorCharacter {
 
     //Map the entire object maybe
     public List<String> getMovieNames(){
-        return movies.stream()
-                .map(Movie::getTitle)
-                .collect(Collectors.toList());
+        if(movies != null) {
+            return movies.stream()
+                    .map(Movie::getTitle)
+                    .collect(Collectors.toList());
+        }
+        return null;
     }
 
 

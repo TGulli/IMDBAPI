@@ -55,9 +55,12 @@ public class Movie {
 
 
     public List<String> getCharacterNames(){
-        return characters.stream()
-                .map(ActorCharacter::getName)
-                .collect(Collectors.toList());
+        if(characters != null) {
+            return characters.stream()
+                    .map(ActorCharacter::getName)
+                    .collect(Collectors.toList());
+        }
+        return null;
     }
 
 
@@ -133,5 +136,12 @@ public class Movie {
 
     public void setTrailer(String trailer) {
         this.trailer = trailer;
+    }
+
+    public String getFranchiseId(){
+        if(franchise != null){
+            return String.valueOf(franchise.getFranchise_id());
+        }
+        return null;
     }
 }

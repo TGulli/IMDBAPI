@@ -1,6 +1,5 @@
 package com.noroff.MovieCharactersAPI.controllers;
 
-
 import com.noroff.MovieCharactersAPI.exceptions.NoItemFoundException;
 import com.noroff.MovieCharactersAPI.models.ActorCharacter;
 import com.noroff.MovieCharactersAPI.models.Franchise;

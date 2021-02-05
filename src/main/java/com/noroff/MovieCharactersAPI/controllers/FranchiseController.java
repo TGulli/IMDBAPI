@@ -13,9 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
-@CrossOrigin(origins = "*") //ka æ detta?
 @RequestMapping(value = "api/v1/franchise")
 public class FranchiseController {
 
@@ -47,14 +47,11 @@ public class FranchiseController {
      * PROVING 1toMANY
      */
 
-    @PutMapping("/franchise/{franchiseId}/movie/{movieid}")
+    @PutMapping("/{franchiseId}/movie/{movieid}")
     public ResponseEntity<Movie> addCharacterToFranchise(@PathVariable("franchiseId") long franchiseId, @PathVariable("movieid") long movieid) throws NoItemFoundException{
 
         Movie movie = movieRepository.findById(movieid).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
         Franchise franchise = this.franchiseRepo.findById(franchiseId).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
-
-
-        //HEIFRAGIT
 
         franchise.getMovies().add(movie);
         movie.setFranchise(franchise);
@@ -63,6 +60,29 @@ public class FranchiseController {
 
         return ResponseEntity.ok().body(movie);
     }
+
+    @DeleteMapping("/delete/{franchiseid}")
+    public void deleteFranchise(@PathVariable("franchiseid") long franchiseid) throws NoItemFoundException{
+        Franchise franchise = franchiseRepo.findById(franchiseid).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
+        Set<Movie> movies = franchise.getMovies();
+        for (Movie movie : movies){
+            movie.setFranchise(null);
+            movieRepository.save(movie);
+        }
+        franchiseRepo.deleteById(franchiseid);
+    }
+
+
+    /*@DeleteMapping("/delete/{franchiseid}")
+    public void deleteFranchise(@PathVariable("franchiseid") long franchiseid) throws NoItemFoundException{
+        Franchise franchise = franchiseRepo.findById(franchiseid).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
+        List<Movie> movies = movieRepository.findMovieByFranchise(franchise);
+        for (Movie movie : movies){
+            movie.setFranchise(null);
+            movieRepository.save(movie);
+        }
+        franchiseRepo.deleteById(franchiseid);
+    }*/
 
 
 }
