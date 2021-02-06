@@ -63,7 +63,6 @@ public class Movie {
         return null;
     }
 
-
     @JsonIgnore
     public Set<ActorCharacter> getCharacters() {
         return characters;

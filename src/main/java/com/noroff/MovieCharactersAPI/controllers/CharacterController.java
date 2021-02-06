@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +20,9 @@ public class CharacterController {
 
     @Autowired
     private CharacterRepository characterRepository;
+
+    @Autowired
+    private MovieRepository movieRepository;
 
     @GetMapping
     public List<ActorCharacter> getAllCharacters(){
@@ -38,7 +43,7 @@ public class CharacterController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ActorCharacter> deleteById(@PathVariable(value = "id") long id) throws NoItemFoundException {
         ActorCharacter actorCharacter = characterRepository.findById(id).orElseThrow(()-> new NoItemFoundException("No character by id " + id));
-        Set<Movie> movies = actorCharacter.getMovies();
+        List<Movie> movies = actorCharacter.getMovies();
         for (Movie m: movies) {
             m.getCharacters().remove(actorCharacter);
         }
@@ -46,18 +51,19 @@ public class CharacterController {
         return ResponseEntity.ok().body(actorCharacter);
     }
 
-    @PutMapping
-    public ResponseEntity<ActorCharacter> update(@RequestBody ActorCharacter character) throws NoItemFoundException {
-        ActorCharacter oldCharacter = characterRepository.findById(character.getId()).orElseThrow(()-> new NoItemFoundException("No character by id " + character.getId()));
+    @PutMapping("/{charid}")
+    public ResponseEntity<ActorCharacter> update(@RequestBody ActorCharacter character, @PathVariable("charid") long charid) throws NoItemFoundException {
+        ActorCharacter oldCharacter = characterRepository.findById(charid).orElseThrow(()-> new NoItemFoundException("No character by id " + character.getId()));
 
-        Set<Movie> movies = oldCharacter.getMovies();
-        for (Movie m: movies) {
-            m.getCharacters().remove(oldCharacter);
-            m.getCharacters().add(character);
-        }
-        character.setMovies(movies);
+        //TODO: GRIS DETTA TE
 
-        characterRepository.save(character);
-        return ResponseEntity.ok().body(character);
+        oldCharacter.setMovies(character.getMovies());
+        oldCharacter.setName(character.getName());
+        oldCharacter.setAlias(character.getAlias());
+        oldCharacter.setGender(character.getGender());
+        oldCharacter.setPicture(character.getPicture());
+
+        characterRepository.save(oldCharacter);
+        return ResponseEntity.ok().body(oldCharacter);
     }
 }

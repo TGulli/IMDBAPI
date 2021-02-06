@@ -100,6 +100,7 @@ public class FranchiseController {
 
     @DeleteMapping("/delete/{franchiseid}")
     public void deleteFranchise(@PathVariable("franchiseid") long franchiseid) throws NoItemFoundException{
+        //CAN MAYBE JSUT DELET THE FRANCHISe
         Franchise franchise = franchiseRepo.findById(franchiseid).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
         List<Movie> movies = franchise.getMovies();
         for (Movie movie : movies){

@@ -15,16 +15,16 @@ public class ActorCharacter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long character_id;
 
-    @Column(name = "FullName")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Alias")
+    @Column(name = "alias")
     private String alias;
 
-    @Column(name = "Gender")
+    @Column(name = "gender")
     private String gender;
 
-    @Column(name = "Picture")
+    @Column(name = "picture")
     private String picture;
 
     @ManyToMany
@@ -33,7 +33,7 @@ public class ActorCharacter {
             joinColumns = {@JoinColumn(name = "character_id")},
             inverseJoinColumns = {@JoinColumn(name = "movie_id")}
     )
-    private Set<Movie> movies;
+    private List<Movie> movies;
 
 
     public ActorCharacter() {}
@@ -47,7 +47,6 @@ public class ActorCharacter {
 
 
     //Map the entire object maybe
-    @JsonIgnore
     public List<String> getMovieNames(){
         if(movies != null) {
             return movies.stream()
@@ -98,12 +97,12 @@ public class ActorCharacter {
         this.picture = picture;
     }
 
-    @JsonIgnore
-    public Set<Movie> getMovies() {
+
+    public List<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<Movie> movies) {
+    public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
 
