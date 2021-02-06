@@ -61,6 +61,16 @@ public class FranchiseController {
         return ResponseEntity.ok().body(movie);
     }
 
+    @PutMapping("/update/{id}")
+    public HttpStatus updateFranchise(@PathVariable("id") long franchiseId, @RequestBody Franchise franchise){
+        franchiseRepo.save(franchise);
+        
+        return HttpStatus.ACCEPTED;
+    }
+
+
+
+
     @DeleteMapping("/delete/{franchiseid}")
     public void deleteFranchise(@PathVariable("franchiseid") long franchiseid) throws NoItemFoundException{
         Franchise franchise = franchiseRepo.findById(franchiseid).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
