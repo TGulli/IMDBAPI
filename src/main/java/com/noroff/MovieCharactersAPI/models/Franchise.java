@@ -1,6 +1,7 @@
 package com.noroff.MovieCharactersAPI.models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,8 +15,8 @@ public class Franchise {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "franchise")
-    private Set<Movie> movies;
+    @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL)
+    private List<Movie> movies;
 
     public Franchise() {
 
@@ -50,11 +51,11 @@ public class Franchise {
         this.description = description;
     }
 
-    public Set<Movie> getMovies() {
+    public List<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<Movie> movies) {
+    public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
 }
