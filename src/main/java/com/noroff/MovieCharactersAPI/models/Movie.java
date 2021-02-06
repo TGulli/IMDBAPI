@@ -1,6 +1,11 @@
 package com.noroff.MovieCharactersAPI.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Movie")
@@ -29,6 +34,13 @@ public class Movie {
     @Column(name = "trailer")
     private String trailer;
 
+    @ManyToMany(mappedBy = "movies")
+    private Set<ActorCharacter> characters;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "franchise_id")
+    private Franchise franchise;
+
     public Movie() {
     }
 
@@ -39,6 +51,35 @@ public class Movie {
         this.director = director;
         this.picture = picture;
         this.trailer = trailer;
+    }
+
+
+    public List<String> getCharacterNames(){
+        if(characters != null) {
+            return characters.stream()
+                    .map(ActorCharacter::getName)
+                    .collect(Collectors.toList());
+        }
+        return null;
+    }
+
+
+    @JsonIgnore
+    public Set<ActorCharacter> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(Set<ActorCharacter> characters) {
+        this.characters = characters;
+    }
+
+    @JsonIgnore
+    public Franchise getFranchise() {
+        return franchise;
+    }
+
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
     }
 
     public long getMovie_id() {
@@ -95,5 +136,12 @@ public class Movie {
 
     public void setTrailer(String trailer) {
         this.trailer = trailer;
+    }
+
+    public String getFranchiseId(){
+        if(franchise != null){
+            return String.valueOf(franchise.getFranchise_id());
+        }
+        return null;
     }
 }

@@ -1,7 +1,6 @@
 package com.noroff.MovieCharactersAPI.models;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -10,13 +9,13 @@ public class Franchise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long franchiseId;
+    private long franchise_id;
 
     private String name;
     private String description;
 
     @OneToMany(mappedBy = "franchise")
-    private List<ActorCharacter> characters; // TODO: Replace String with movie class
+    private Set<Movie> movies;
 
     public Franchise() {
 
@@ -25,28 +24,14 @@ public class Franchise {
     public Franchise(String name, String description) {
         this.name = name;
         this.description = description;
-        this.characters = characters;
-    }
-    public Franchise(long franchiseId, String name, String description) {
-        this.franchiseId = franchiseId;
-        this.name = name;
-        this.description = description;
     }
 
-    public long getFranchiseId() {
-        return franchiseId;
+    public long getFranchise_id() {
+        return franchise_id;
     }
 
-    public void setFranchiseId(long franchiseId) {
-        this.franchiseId = franchiseId;
-    }
-
-    public List<ActorCharacter> getCharacters() {
-        return characters;
-    }
-
-    public void setCharacters(List<ActorCharacter> characters) {
-        this.characters = characters;
+    public void setFranchise_id(long franchiseId) {
+        this.franchise_id = franchiseId;
     }
 
     public String getName() {
@@ -63,5 +48,13 @@ public class Franchise {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 }
