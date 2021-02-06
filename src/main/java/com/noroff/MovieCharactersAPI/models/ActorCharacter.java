@@ -47,6 +47,7 @@ public class ActorCharacter {
 
 
     //Map the entire object maybe
+    @JsonIgnore
     public List<String> getMovieNames(){
         if(movies != null) {
             return movies.stream()
@@ -105,4 +106,5 @@ public class ActorCharacter {
     public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
+
 }
