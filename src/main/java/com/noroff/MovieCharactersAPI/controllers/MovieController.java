@@ -1,21 +1,14 @@
 package com.noroff.MovieCharactersAPI.controllers;
 
 import com.noroff.MovieCharactersAPI.exceptions.NoItemFoundException;
-import com.noroff.MovieCharactersAPI.models.ActorCharacter;
-import com.noroff.MovieCharactersAPI.models.Franchise;
 import com.noroff.MovieCharactersAPI.models.Movie;
-import com.noroff.MovieCharactersAPI.repositories.CharacterRepository;
-import com.noroff.MovieCharactersAPI.repositories.FranchiseRepository;
-import com.noroff.MovieCharactersAPI.repositories.MovieRepository;
+import com.noroff.MovieCharactersAPI.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("api/v1/movie")
@@ -26,105 +19,85 @@ public class MovieController {
      */
 
     @Autowired
-    MovieRepository movieRepository;
+    MovieService movieService;
 
-    @Autowired
-    CharacterRepository characterRepository;
-
-    @Autowired
-    FranchiseRepository franchiseRepository;
 
     @GetMapping
     public List<Movie> getAllMovies() {
-        /*
-        A method to returns all the movies in the database
-        as ActorCharacter objects.
-         */
-        return this.movieRepository.findAll();
+        return movieService.getAllMovies();
     }
+
+    /*
+     A method to create a new Movie object and add it to the database.
+     */
 
     @PostMapping
     public Movie addMovie(@RequestBody Movie movie) {
-        /*
-        A method to create a new Movie object and add it to the database.
-         */
-        return this.movieRepository.save(movie);
+        return movieService.createNewMovie(movie);
     }
+
+
+     /*
+        A method to return a specific movie by its id.
+         */
 
     @GetMapping("/{id}")
     public ResponseEntity<Movie> getById(@PathVariable(value = "id") long id) throws NoItemFoundException {
-        /*
-        A method to return a specific movie by its id.
-         */
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new NoItemFoundException("No movie by id " + id));
+        Movie movie = movieService.getMovieById(id);
         return ResponseEntity.ok().body(movie);
     }
 
-
-    @PutMapping("/update/{movie_id}")
-    public HttpStatus update(@RequestBody Movie movie, @PathVariable("movie_id") long movie_id) throws NoItemFoundException {
-        /*
+      /*
         A method to update a specific movie and all its relationships in the database.
          */
-        //Movie oldMovie = movieRepository.findById(movie_id).orElseThrow(()-> new NoItemFoundException("No movie by id " + movie_id));
 
-        Movie updatedMovie = movie;
-        updatedMovie.setMovie_id(movie_id);
-        movieRepository.save(updatedMovie);
-        return HttpStatus.ACCEPTED;
+
+    @PutMapping("/update/{movie_id}")
+    public ResponseEntity<Movie> update(@RequestBody Movie movie, @PathVariable("movie_id") long movie_id) throws NoItemFoundException {
+        return movieService.updateMovie(movie, movie_id);
     }
+
+
 
     //Delete
     @DeleteMapping("/{id}")
     public ResponseEntity<Movie> deleteById(@PathVariable(value = "id") long id) throws NoItemFoundException {
-        Movie movie = movieRepository.findById(id).orElseThrow(()-> new NoItemFoundException("No movie by id " + id));
-        List<ActorCharacter> characters = movie.getCharacters();
-        for (ActorCharacter character: characters) {
-            character.getMovies().remove(character);
-        }
-        movieRepository.delete(movie);
-        return ResponseEntity.ok().body(movie);
+        return movieService.deleteMovie(id);
     }
 
 
     /**
      * SPECIAL QUERY 1:
+     *  A method that returns all the movies for a specific franchise.
      */
 
     @GetMapping("/franchise/{franchiseid}")
     public ResponseEntity<List<Movie>> getMovieByFranchise(@PathVariable(value = "franchiseid") long franchiseid) throws NoItemFoundException {
-        /*
-        A method that returns all the movies for a specific franchise.
-         */
-        Franchise franchise = franchiseRepository.findById(franchiseid).orElseThrow(() -> new NoItemFoundException("AHHHHHH"));
-        List<Movie> movieList = movieRepository.findMovieByFranchise(franchise);
-        return ResponseEntity.ok().body(movieList);
+        return movieService.getAllMoviesFromFranchise(franchiseid);
     }
+
+
 
     /**
      * SPECIAL QUERY 2:
+     * A method that returns all the characters in a specific movie
      */
-
+    /*
     @GetMapping("/all-characters/{movieid}")
     public ResponseEntity<Set<ActorCharacter>> extractCharactersFromMovie(@PathVariable("movieid") long movieid) throws NoItemFoundException {
-        /*
-            A method that returns all the characters in a specific movie
-         */
         Movie movie = movieRepository.findById(movieid).orElseThrow(() -> new NoItemFoundException("AHHHHHH"));
         Set<ActorCharacter> output = characterRepository.findActorCharacterById(movie.getMovie_id());
         return ResponseEntity.ok().body(output);
-
     }
-
+    */
     /**
      * SPECIAL QUERY 3:
+     * A method that returns all characters in a given franchise
      */
-
+    /*
     @GetMapping("/get-characters-franchise/{id}")
     public ResponseEntity<Set<ActorCharacter>> extractCharactersFromFranchise(@PathVariable("id") long franchiseId) throws NoItemFoundException {
-        /*
-           A method that returns all characters in a given franchise
-         */
+
         Franchise franchise = franchiseRepository.findById(franchiseId).orElseThrow(() -> new NoItemFoundException("NOOOOO"));
         Set<ActorCharacter> b = new HashSet<>();
 
@@ -137,29 +110,6 @@ public class MovieController {
         return ResponseEntity.ok().body(b);
 
     }
+    */
 
-    /**
-     * PROVING MANY TO MANY
-     */
-
-    @PutMapping("/playingaround/{charid}/m/{movid}")
-    public HttpStatus testingOutRestFunctionality(@PathVariable("charid") long characterId, @PathVariable("movid") long movieid) throws NoItemFoundException{
-        Movie movie = movieRepository.findById(movieid).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
-        ActorCharacter actorCharacter = this.characterRepository.findById(characterId).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
-
-        List<Movie> a = new ArrayList<>();
-        a.add(movie);
-
-        List<ActorCharacter> b = new ArrayList<>();
-        b.add(actorCharacter);
-
-        actorCharacter.setMovies(a);
-        movie.setCharacters(b);
-
-
-        characterRepository.save(actorCharacter);
-        movieRepository.save(movie);
-
-        return HttpStatus.ACCEPTED;
-    }
 }
