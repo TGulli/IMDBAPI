@@ -47,6 +47,26 @@ public class MovieController {
     }
 
 
+    @PutMapping("/update/{movieid}")
+    public HttpStatus update(@RequestBody Movie movie, @PathVariable("movieid") long movieid) throws NoItemFoundException {
+        Movie oldMovie = movieRepository.findById(movieid).orElseThrow(()-> new NoItemFoundException("No movie by id " + movieid));
+
+
+        oldMovie.setTitle(movie.getTitle());
+        oldMovie.setGenre(movie.getGenre());
+        oldMovie.setYear(movie.getYear());
+        oldMovie.setDirector(movie.getDirector());
+        oldMovie.setPicture(movie.getPicture());
+        oldMovie.setTrailer(movie.getTrailer());
+
+
+        oldMovie.setCharacters(movie.getCharacters());
+
+        movieRepository.save(oldMovie);
+        return HttpStatus.ACCEPTED;
+    }
+
+
     /**
      * SPECIAL QUERY 1:
      */
@@ -106,7 +126,7 @@ public class MovieController {
         List<Movie> a = new ArrayList<>();
         a.add(movie);
 
-        Set<ActorCharacter> b = new HashSet<>();
+        List<ActorCharacter> b = new ArrayList<>();
         b.add(actorCharacter);
 
         actorCharacter.setMovies(a);
