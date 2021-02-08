@@ -38,7 +38,12 @@ public class Movie {
     @Column(name = "trailer")
     private String trailer;
 
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany()
+    @JoinTable(
+            name = "movie_characters",
+            joinColumns = {@JoinColumn(name = "movie_id")},
+            inverseJoinColumns = {@JoinColumn(name = "character_id")}
+    )
     public List<ActorCharacter> characters;
 
     @ManyToOne(fetch = FetchType.LAZY)

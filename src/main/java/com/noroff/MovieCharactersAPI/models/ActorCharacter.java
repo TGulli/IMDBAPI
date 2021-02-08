@@ -30,12 +30,7 @@ public class ActorCharacter {
     @Column(name = "picture")
     private String picture;
 
-    @ManyToMany
-    @JoinTable(
-            name = "movie_characters",
-            joinColumns = {@JoinColumn(name = "character_id")},
-            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
-    )
+    @ManyToMany(mappedBy = "characters")
     public List<Movie> movies;
 
 
