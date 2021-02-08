@@ -72,6 +72,9 @@ public class Movie {
         return null;
     }
 
+    public void setMovie_id(long movie_id) {
+        this.movie_id = movie_id;
+    }
 
     public List<ActorCharacter> getCharacters() {
         return characters;
