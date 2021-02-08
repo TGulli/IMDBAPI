@@ -34,7 +34,7 @@ public class MovieController {
     @Autowired
     FranchiseRepository franchiseRepository;
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Movie> getAllMovies() {
         /*
         A method to returns all the movies in the database
@@ -43,7 +43,7 @@ public class MovieController {
         return this.movieRepository.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public Movie addMovie(@RequestBody Movie movie) {
         /*
         A method to create a new Movie object and add it to the database.
@@ -51,7 +51,7 @@ public class MovieController {
         return this.movieRepository.save(movie);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Movie> getById(@PathVariable(value = "id") long id) throws NoItemFoundException {
         /*
         A method to return a specific movie by its id.
@@ -83,7 +83,7 @@ public class MovieController {
     }
 
     //Delete
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Movie> deleteById(@PathVariable(value = "id") long id) throws NoItemFoundException {
         Movie movie = movieRepository.findById(id).orElseThrow(()-> new NoItemFoundException("No movie by id " + id));
         List<ActorCharacter> characters = movie.getCharacters();
