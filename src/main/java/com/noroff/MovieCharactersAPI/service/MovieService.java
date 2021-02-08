@@ -46,6 +46,13 @@ public class MovieService {
     public ResponseEntity<Movie> updateMovie(Movie movie, Long movie_id) throws NoItemFoundException{
         Movie oldMovie = movieRepository.findById(movie_id).orElseThrow(()-> new NoItemFoundException("No movie by id " + movie_id));
 
+       /* ---- GOAL (?) ----
+        Movie updatedMovie = movie;
+        updatedMovie.setMovie_id(movie_id);
+        movieRepository.save(updatedMovie);
+        return HttpStatus.ACCEPTED;
+        */
+
         oldMovie.setTitle(movie.getTitle());
         oldMovie.setGenre(movie.getGenre());
         oldMovie.setYear(movie.getYear());

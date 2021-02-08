@@ -23,51 +23,26 @@ handling user interactions for franchise.
 public class FranchiseController {
 
     @Autowired
-    private FranchiseRepository franchiseRepo;
-
-    @Autowired
-    private MovieRepository movieRepository;
-
-    @Autowired
     private FranchiseService franchiseService;
 
     /* Returns all the franchises in the database */
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Franchise> getAll(){
         return franchiseService.getAllFranchises();
     }
 
     /*Returns a given Franchise based on the ID from PathVariable. If not found, the function throws a NoItemFoundException. */
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Franchise> getById(@PathVariable(value = "id") long id) throws NoItemFoundException {
         return franchiseService.getFranchiseById(id);
     }
 
     /* Store a Franchise given as RequestBody */
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Franchise> postFranchise(@RequestBody Franchise franchise){
        return franchiseService.createNewFranchise(franchise);
     }
 
-    /**
-     * PROVING 1toMANY
-     */
-
-    /* Binds a character to a movie, with franchiseId and movieIs as path variables.
-     *  If the given movie id or franchise id is not found, the function throws a NoItemFoundException. */
-    @PutMapping("/{franchiseId}/movie/{movieid}")
-    public ResponseEntity<Movie> addCharacterToFranchise(@PathVariable("franchiseId") long franchiseId, @PathVariable("movieid") long movieid) throws NoItemFoundException{
-
-        Movie movie = movieRepository.findById(movieid).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
-        Franchise franchise = this.franchiseRepo.findById(franchiseId).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
-
-        franchise.getMovies().add(movie);
-        movie.setFranchise(franchise);
-
-        movieRepository.save(movie);
-
-        return ResponseEntity.ok().body(movie);
-    }
 
     /* Updating a franchise with a given id as PathVariable to the given franchise from RequestBody.
      *  If the franchise with the given id is not found, the function throws a noItemFoundException*/
