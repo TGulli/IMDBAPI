@@ -32,7 +32,7 @@ public class CharacterController {
     }
 
     @PostMapping("/add")
-    public ActorCharacter addCharacter(@RequestBody ActorCharacter character){
+    public ResponseEntity<ActorCharacter> addCharacter(@RequestBody ActorCharacter character){
         /*
         A method to create a new ActorCharacter object and add it to the database.
          */

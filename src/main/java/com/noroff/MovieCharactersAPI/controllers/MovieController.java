@@ -37,9 +37,6 @@ public class MovieController {
         /*
         A method to return a specific movie by its id.
          */
-
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Movie> getById(@PathVariable(value = "id") long id) throws NoItemFoundException {
         Movie movie = movieService.getMovieById(id);
         return ResponseEntity.ok().body(movie);
     }
