@@ -66,6 +66,18 @@ public class MovieController {
         return HttpStatus.ACCEPTED;
     }
 
+    //Delete
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Movie> deleteById(@PathVariable(value = "id") long id) throws NoItemFoundException {
+        Movie movie = movieRepository.findById(id).orElseThrow(()-> new NoItemFoundException("No movie by id " + id));
+        List<ActorCharacter> characters = movie.getCharacters();
+        for (ActorCharacter character: characters) {
+            character.getMovies().remove(character);
+        }
+        movieRepository.delete(movie);
+        return ResponseEntity.ok().body(movie);
+    }
+
 
     /**
      * SPECIAL QUERY 1:
