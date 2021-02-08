@@ -6,13 +6,14 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/*
+A class for storing character information in ActorCharacter objects.
+The class is represented as a table with its variable names as columns in the database.
+*/
+
 @Entity
 @Table(name = "Character")
 public class ActorCharacter {
-    /*
-    A class for storing character information in ActorCharacter objects.
-    The class is represented as a table with its variable names as columns in the database.
-     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -59,16 +59,12 @@ public class CharacterService {
 
     //Update character
     public ResponseEntity<ActorCharacter> updateCharacter(ActorCharacter character, Long id) throws NoItemFoundException{
-        ActorCharacter oldCharacter = characterRepository.findById(id).orElseThrow(()-> new NoItemFoundException("No character by id " + id));
+        //ActorCharacter oldCharacter = characterRepository.findById(id).orElseThrow(()-> new NoItemFoundException("No character by id " + id));
 
-        oldCharacter.setMovies(character.getMovies());
-        oldCharacter.setName(character.getName());
-        oldCharacter.setAlias(character.getAlias());
-        oldCharacter.setGender(character.getGender());
-        oldCharacter.setPicture(character.getPicture());
-
-        characterRepository.save(oldCharacter);
-        return ResponseEntity.ok().body(oldCharacter);
+        ActorCharacter updatedCharacter = character;
+        updatedCharacter.setId(id);
+        characterRepository.save(updatedCharacter);
+        return ResponseEntity.ok().body(updatedCharacter);
     }
 
     //Special query 2: Extract characters from movie
@@ -92,7 +88,4 @@ public class CharacterService {
 
         return ResponseEntity.ok().body(b);
     }
-
-
-
 }

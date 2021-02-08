@@ -1,17 +1,12 @@
 package com.noroff.MovieCharactersAPI.controllers;
 
 import com.noroff.MovieCharactersAPI.exceptions.NoItemFoundException;
-import com.noroff.MovieCharactersAPI.models.Movie;
-import com.noroff.MovieCharactersAPI.repositories.FranchiseRepository;
 import com.noroff.MovieCharactersAPI.models.Franchise;
-import com.noroff.MovieCharactersAPI.repositories.MovieRepository;
 import com.noroff.MovieCharactersAPI.service.FranchiseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -43,7 +38,6 @@ public class FranchiseController {
        return franchiseService.createNewFranchise(franchise);
     }
 
-
     /* Updating a franchise with a given id as PathVariable to the given franchise from RequestBody.
      *  If the franchise with the given id is not found, the function throws a noItemFoundException*/
     @PutMapping("/update/{id}")
@@ -51,8 +45,7 @@ public class FranchiseController {
         return franchiseService.updateFranchise(franchiseId, franchise);
     }
 
-
-    /* Delete a franchise at a given id from pathvariabel.
+    /* Delete a franchise at a given id from PathVariable.
      *  If not found, the function throws a NoItemFoundException. */
     @DeleteMapping("/delete/{franchiseid}")
     public ResponseEntity<Franchise> deleteFranchise(@PathVariable("franchiseid") long franchiseid) throws NoItemFoundException{
