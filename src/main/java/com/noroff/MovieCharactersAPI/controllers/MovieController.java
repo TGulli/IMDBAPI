@@ -61,24 +61,16 @@ public class MovieController {
     }
 
 
-    @PutMapping("/update/{movieid}")
-    public HttpStatus update(@RequestBody Movie movie, @PathVariable("movieid") long movieid) throws NoItemFoundException {
+    @PutMapping("/update/{movie_id}")
+    public HttpStatus update(@RequestBody Movie movie, @PathVariable("movie_id") long movie_id) throws NoItemFoundException {
         /*
         A method to update a specific movie and all its relationships in the database.
          */
-        Movie oldMovie = movieRepository.findById(movieid).orElseThrow(()-> new NoItemFoundException("No movie by id " + movieid));
+        //Movie oldMovie = movieRepository.findById(movie_id).orElseThrow(()-> new NoItemFoundException("No movie by id " + movie_id));
 
-        oldMovie.setTitle(movie.getTitle());
-        oldMovie.setGenre(movie.getGenre());
-        oldMovie.setYear(movie.getYear());
-        oldMovie.setDirector(movie.getDirector());
-        oldMovie.setPicture(movie.getPicture());
-        oldMovie.setTrailer(movie.getTrailer());
-
-
-        oldMovie.setCharacters(movie.getCharacters());
-
-        movieRepository.save(oldMovie);
+        Movie updatedMovie = movie;
+        updatedMovie.setMovie_id(movie_id);
+        movieRepository.save(updatedMovie);
         return HttpStatus.ACCEPTED;
     }
 

@@ -62,19 +62,15 @@ public class CharacterController {
     }
 
     @PutMapping("/{charid}")
-    public ResponseEntity<ActorCharacter> update(@RequestBody ActorCharacter character, @PathVariable("charid") long charid) throws NoItemFoundException {
+    public ResponseEntity<ActorCharacter> update(@RequestBody ActorCharacter character, @PathVariable("id") long id) throws NoItemFoundException {
         /*
-        A method to update a specific character and all its relationships in the database.
+        A method to update a specific character in the database.
          */
-        ActorCharacter oldCharacter = characterRepository.findById(charid).orElseThrow(()-> new NoItemFoundException("No character by id " + character.getId()));
+        //ActorCharacter updatedCharacter = characterRepository.findById(id).orElseThrow(()-> new NoItemFoundException("No character by id " + id));
 
-        oldCharacter.setMovies(character.getMovies());
-        oldCharacter.setName(character.getName());
-        oldCharacter.setAlias(character.getAlias());
-        oldCharacter.setGender(character.getGender());
-        oldCharacter.setPicture(character.getPicture());
-
-        characterRepository.save(oldCharacter);
-        return ResponseEntity.ok().body(oldCharacter);
+        ActorCharacter updatedCharacter = character;
+        updatedCharacter.setId(id);
+        characterRepository.save(updatedCharacter);
+        return ResponseEntity.ok().body(updatedCharacter);
     }
 }
