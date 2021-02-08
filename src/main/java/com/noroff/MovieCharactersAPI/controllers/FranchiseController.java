@@ -28,21 +28,21 @@ public class FranchiseController {
     private MovieRepository movieRepository;
 
     /* Returns all the franchises in the database */
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Franchise> getAll(){
         return franchiseRepo.findAll();
     }
 
 
     /*Returns a given Franchise based on the ID from PathVariable. If not found, the function throws a NoItemFoundException. */
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Franchise> getById(@PathVariable(value = "id") long id) throws NoItemFoundException {
         Franchise franchise = franchiseRepo.findById(id).orElseThrow(() -> new NoItemFoundException("No movie by id " + id));
         return ResponseEntity.ok().body(franchise);
     }
 
     /* Store a Franchise given as RequestBody */
-    @PostMapping
+    @PostMapping("/add")
     public void setFranchise(@RequestBody Franchise franchise){
         franchiseRepo.save(franchise);
     }

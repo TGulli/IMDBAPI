@@ -21,7 +21,7 @@ public class CharacterController {
     @Autowired
     private CharacterRepository characterRepository;
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<ActorCharacter> getAllCharacters(){
         /*
         A method to returns all the characters in the database
@@ -30,7 +30,7 @@ public class CharacterController {
         return this.characterRepository.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ActorCharacter addCharacter(@RequestBody ActorCharacter character){
         /*
         A method to create a new ActorCharacter object and add it to the database.
@@ -38,7 +38,7 @@ public class CharacterController {
         return this.characterRepository.save(character);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<ActorCharacter> getById(@PathVariable(value = "id") long id) throws NoItemFoundException {
         /*
         A method to return a specific character by its id.
@@ -47,7 +47,7 @@ public class CharacterController {
         return ResponseEntity.ok().body(actorCharacter);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<ActorCharacter> deleteById(@PathVariable(value = "id") long id) throws NoItemFoundException {
         /*
         A method to delete a specific character and all its relationships in the database.
@@ -61,12 +61,12 @@ public class CharacterController {
         return ResponseEntity.ok().body(actorCharacter);
     }
 
-    @PutMapping("/{charid}")
+    @PutMapping("/update/{charid}")
     public ResponseEntity<ActorCharacter> update(@RequestBody ActorCharacter character, @PathVariable("charid") long charid) throws NoItemFoundException {
         /*
         A method to update a specific character and all its relationships in the database.
          */
-        ActorCharacter oldCharacter = characterRepository.findById(charid).orElseThrow(()-> new NoItemFoundException("No character by id " + character.getId()));
+        ActorCharacter oldCharacter = characterRepository.findById(charid).orElseThrow(()-> new NoItemFoundException("No character by id " + charid));
 
         oldCharacter.setMovies(character.getMovies());
         oldCharacter.setName(character.getName());
