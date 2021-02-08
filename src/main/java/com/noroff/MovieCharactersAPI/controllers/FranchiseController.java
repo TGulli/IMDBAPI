@@ -17,6 +17,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/*
+The FranchiseController class is responsible for making endpoints, handling user interactions for franchise.
+ */
 @RestController
 @RequestMapping(value = "api/v1/franchise")
 public class FranchiseController {
@@ -27,28 +30,32 @@ public class FranchiseController {
     @Autowired
     private MovieRepository movieRepository;
 
+    /* Returns all the franchises in the list*/
     @GetMapping
     public List<Franchise> getAll(){
         return franchiseRepo.findAll();
     }
 
 
+    /*Returns a given Franchise based on the ID from pathvariabel. If not found, the function throws an NoItemFoundException. */
     @GetMapping("/{id}")
     public ResponseEntity<Franchise> getById(@PathVariable(value = "id") long id) throws NoItemFoundException {
         Franchise franchise = franchiseRepo.findById(id).orElseThrow(() -> new NoItemFoundException("No movie by id " + id));
         return ResponseEntity.ok().body(franchise);
     }
 
-
+    /* Store a Franchise given as requestbody */
     @PostMapping
     public void setFranchise(@RequestBody Franchise franchise){
-       franchiseRepo.save(franchise);
+        franchiseRepo.save(franchise);
     }
 
     /**
      * PROVING 1toMANY
      */
 
+    /* Binds a character to a movie, with franchiseId and movieIs as path variabels.
+     *  If the given movie id or franchise id is not found, the function throws a NoItemFoundException. */
     @PutMapping("/{franchiseId}/movie/{movieid}")
     public ResponseEntity<Movie> addCharacterToFranchise(@PathVariable("franchiseId") long franchiseId, @PathVariable("movieid") long movieid) throws NoItemFoundException{
 
@@ -63,6 +70,8 @@ public class FranchiseController {
         return ResponseEntity.ok().body(movie);
     }
 
+    /* Updating a franchise with a given id as path variabel to the given franchise from requestbody.
+     *  If the franchise with the given id is not found, the function throws a noItemFoundException*/
     @PutMapping("/update/{id}")
     public HttpStatus updateFranchise(@PathVariable("id") long franchiseId, @RequestBody Franchise franchise) throws NoItemFoundException{
 
@@ -96,11 +105,10 @@ public class FranchiseController {
     }
 
 
-
-
+    /* Delete a franchise at a given id from pathvariabel.
+     *  If not found, the function throws a NoItemFoundException. */
     @DeleteMapping("/delete/{franchiseid}")
     public void deleteFranchise(@PathVariable("franchiseid") long franchiseid) throws NoItemFoundException{
-        //CAN MAYBE JSUT DELET THE FRANCHISe
         Franchise franchise = franchiseRepo.findById(franchiseid).orElseThrow(() -> new NoItemFoundException("Something is terribly wrong"));
         List<Movie> movies = franchise.getMovies();
         for (Movie movie : movies){
