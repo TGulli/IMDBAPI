@@ -1,5 +1,6 @@
 package com.noroff.MovieCharactersAPI.models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class ActorCharacter {
             joinColumns = {@JoinColumn(name = "character_id")},
             inverseJoinColumns = {@JoinColumn(name = "movie_id")}
     )
-    private List<Movie> movies;
+    public List<Movie> movies;
 
 
     public ActorCharacter() {}
@@ -46,7 +47,7 @@ public class ActorCharacter {
     }
 
 
-    //Map the entire object maybe
+    @JsonGetter("movies")
     public List<String> getMovieNames(){
         if(movies != null) {
             return movies.stream()

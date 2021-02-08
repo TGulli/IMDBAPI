@@ -1,6 +1,8 @@
 package com.noroff.MovieCharactersAPI.models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -35,7 +37,7 @@ public class Movie {
     private String trailer;
 
     @ManyToMany(mappedBy = "movies")
-    private Set<ActorCharacter> characters;
+    public List<ActorCharacter> characters;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "franchise_id")
@@ -53,7 +55,7 @@ public class Movie {
         this.trailer = trailer;
     }
 
-
+    @JsonGetter("characters")
     public List<String> getCharacterNames(){
         if(characters != null) {
             return characters.stream()
@@ -63,12 +65,12 @@ public class Movie {
         return null;
     }
 
-    @JsonIgnore
-    public Set<ActorCharacter> getCharacters() {
+
+    public List<ActorCharacter> getCharacters() {
         return characters;
     }
 
-    public void setCharacters(Set<ActorCharacter> characters) {
+    public void setCharacters(List<ActorCharacter> characters) {
         this.characters = characters;
     }
 
@@ -83,10 +85,6 @@ public class Movie {
 
     public long getMovie_id() {
         return movie_id;
-    }
-
-    public void setMovie_id(long movie_id) {
-        this.movie_id = movie_id;
     }
 
     public String getTitle() {
