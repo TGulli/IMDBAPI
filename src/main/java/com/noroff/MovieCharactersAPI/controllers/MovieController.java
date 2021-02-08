@@ -85,11 +85,9 @@ public class MovieController {
     /*
     @GetMapping("/all-characters/{movieid}")
     public ResponseEntity<Set<ActorCharacter>> extractCharactersFromMovie(@PathVariable("movieid") long movieid) throws NoItemFoundException {
-
         Movie movie = movieRepository.findById(movieid).orElseThrow(() -> new NoItemFoundException("AHHHHHH"));
         Set<ActorCharacter> output = characterRepository.findActorCharacterById(movie.getMovie_id());
         return ResponseEntity.ok().body(output);
-
     }
     */
     /**
