@@ -20,6 +20,10 @@ import java.util.Set;
 @RestController
 @RequestMapping("api/v1/movie")
 public class MovieController {
+    /*
+    The MovieController class is responsible for making endpoints for movies,
+    handling user interactions and deciding what to do with it.
+     */
 
     @Autowired
     MovieRepository movieRepository;
@@ -32,18 +36,50 @@ public class MovieController {
 
     @GetMapping
     public List<Movie> getAllMovies() {
+        /*
+        A method to returns all the movies in the database
+        as ActorCharacter objects.
+         */
         return this.movieRepository.findAll();
     }
 
     @PostMapping
     public Movie addMovie(@RequestBody Movie movie) {
+        /*
+        A method to create a new Movie object and add it to the database.
+         */
         return this.movieRepository.save(movie);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Movie> getById(@PathVariable(value = "id") long id) throws NoItemFoundException {
+        /*
+        A method to return a specific movie by its id.
+         */
         Movie movie = movieRepository.findById(id).orElseThrow(() -> new NoItemFoundException("No movie by id " + id));
         return ResponseEntity.ok().body(movie);
+    }
+
+
+    @PutMapping("/update/{movieid}")
+    public HttpStatus update(@RequestBody Movie movie, @PathVariable("movieid") long movieid) throws NoItemFoundException {
+        /*
+        A method to update a specific movie and all its relationships in the database.
+         */
+        Movie oldMovie = movieRepository.findById(movieid).orElseThrow(()-> new NoItemFoundException("No movie by id " + movieid));
+
+        oldMovie.setTitle(movie.getTitle());
+        oldMovie.setGenre(movie.getGenre());
+        oldMovie.setYear(movie.getYear());
+        oldMovie.setDirector(movie.getDirector());
+        oldMovie.setPicture(movie.getPicture());
+        oldMovie.setTrailer(movie.getTrailer());
+
+
+        oldMovie.setCharacters(movie.getCharacters());
+
+        movieRepository.save(oldMovie);
+        return HttpStatus.ACCEPTED;
     }
 
 
@@ -53,6 +89,9 @@ public class MovieController {
 
     @GetMapping("/franchise/{franchiseid}")
     public ResponseEntity<List<Movie>> getMovieByFranchise(@PathVariable(value = "franchiseid") long franchiseid) throws NoItemFoundException {
+        /*
+        A method that returns all the movies for a specific franchise.
+         */
         Franchise franchise = franchiseRepository.findById(franchiseid).orElseThrow(() -> new NoItemFoundException("AHHHHHH"));
         List<Movie> movieList = movieRepository.findMovieByFranchise(franchise);
         return ResponseEntity.ok().body(movieList);
@@ -64,6 +103,9 @@ public class MovieController {
 
     @GetMapping("/all-characters/{movieid}")
     public ResponseEntity<Set<ActorCharacter>> extractCharactersFromMovie(@PathVariable("movieid") long movieid) throws NoItemFoundException {
+        /*
+            A method that returns all the characters in a specific movie
+         */
         Movie movie = movieRepository.findById(movieid).orElseThrow(() -> new NoItemFoundException("AHHHHHH"));
         Set<ActorCharacter> output = characterRepository.findActorCharacterById(movie.getMovie_id());
         return ResponseEntity.ok().body(output);
@@ -76,8 +118,10 @@ public class MovieController {
 
     @GetMapping("/get-characters-franchise/{id}")
     public ResponseEntity<Set<ActorCharacter>> extractCharactersFromFranchise(@PathVariable("id") long franchiseId) throws NoItemFoundException {
+        /*
+           A method that returns all characters in a given franchise
+         */
         Franchise franchise = franchiseRepository.findById(franchiseId).orElseThrow(() -> new NoItemFoundException("NOOOOO"));
-
         Set<ActorCharacter> b = new HashSet<>();
 
         for (Movie m : movieRepository.findMovieByFranchise(franchise)){
@@ -89,10 +133,6 @@ public class MovieController {
         return ResponseEntity.ok().body(b);
 
     }
-
-
-
-
 
     /**
      * PROVING MANY TO MANY
@@ -106,7 +146,7 @@ public class MovieController {
         List<Movie> a = new ArrayList<>();
         a.add(movie);
 
-        Set<ActorCharacter> b = new HashSet<>();
+        List<ActorCharacter> b = new ArrayList<>();
         b.add(actorCharacter);
 
         actorCharacter.setMovies(a);
