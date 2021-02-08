@@ -2,16 +2,18 @@ package com.noroff.MovieCharactersAPI.models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Movie")
 public class Movie {
+    /*
+    A class for storing movie information in Movie objects.
+    The class is represented as a table with its variable names as columns in the database.
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

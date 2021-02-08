@@ -1,16 +1,18 @@
 package com.noroff.MovieCharactersAPI.models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Character")
 public class ActorCharacter {
+    /*
+    A class for storing character information in ActorCharacter objects.
+    The class is represented as a table with its variable names as columns in the database.
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +49,8 @@ public class ActorCharacter {
     }
 
 
+    // Getters and setters
+
     @JsonGetter("movies")
     public List<String> getMovieNames(){
         if(movies != null) {
@@ -56,7 +60,6 @@ public class ActorCharacter {
         }
         return null;
     }
-
 
     public long getId() {
         return character_id;

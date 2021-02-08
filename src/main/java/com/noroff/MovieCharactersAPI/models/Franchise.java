@@ -2,11 +2,14 @@ package com.noroff.MovieCharactersAPI.models;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "Franchise")
 public class Franchise {
+    /*
+    A class for storing franchise information in Franchise objects.
+    The class is represented as a table with its variable names as columns in the database.
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

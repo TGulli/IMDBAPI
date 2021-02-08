@@ -4,7 +4,6 @@ import com.noroff.MovieCharactersAPI.exceptions.NoItemFoundException;
 import com.noroff.MovieCharactersAPI.models.ActorCharacter;
 import com.noroff.MovieCharactersAPI.models.Movie;
 import com.noroff.MovieCharactersAPI.repositories.CharacterRepository;
-import com.noroff.MovieCharactersAPI.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,20 +14,17 @@ import java.util.List;
 @RequestMapping("api/v1/character")
 public class CharacterController {
     /*
-    The CharacterController class is responsible for making endpoints,
+    The CharacterController class is responsible for making endpoints for characters,
     handling user interactions and deciding what to do with it.
      */
 
     @Autowired
     private CharacterRepository characterRepository;
 
-    @Autowired
-    private MovieRepository movieRepository;
-
     @GetMapping
     public List<ActorCharacter> getAllCharacters(){
         /*
-        A method to return all the characters in the database
+        A method to returns all the characters in the database
         as ActorCharacter objects.
          */
         return this.characterRepository.findAll();
@@ -71,8 +67,6 @@ public class CharacterController {
         A method to update a specific character and all its relationships in the database.
          */
         ActorCharacter oldCharacter = characterRepository.findById(charid).orElseThrow(()-> new NoItemFoundException("No character by id " + character.getId()));
-
-        //TODO: GRIS DETTA TE
 
         oldCharacter.setMovies(character.getMovies());
         oldCharacter.setName(character.getName());
