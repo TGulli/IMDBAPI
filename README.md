@@ -26,7 +26,7 @@ This project was made as an assignment during the Experis Academy Java Fullstack
 - Heroku
 
 ### Code example
-```bash
+```java
 // Post method from the CharacterService class
 @Service
 public class CharacterService {

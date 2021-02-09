@@ -12,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.server.MethodNotAllowedException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -29,35 +30,6 @@ public class RestAPIExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
-    /*
-    @ExceptionHandler(ServerError.class)
-    public ResponseEntity<?> serverExeption(ServerError ex, WebRequest request) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    @ExceptionHandler(BadRequest.class)
-    public ResponseEntity<?> badRequestExeption(BadRequest ex, WebRequest request) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
-    }
-    @ExceptionHandler(NotAllowedExeption.class)
-    public ResponseEntity<?> notAllowedExeption(NotAllowedExeption ex, WebRequest request) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.METHOD_NOT_ALLOWED);
-    }
-
-    @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), "this ain't readable son", request.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.METHOD_NOT_ALLOWED);
-    }
-
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), "YOU BROKE THE ENTIRE API YOU DONKEY", request.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.METHOD_NOT_ALLOWED);
-    }
-    */
 
     /**
      * API RELATED EXCEPTIONS.
@@ -72,7 +44,7 @@ public class RestAPIExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     //HANDLE ILLEGAL PARAMETER
-    @ExceptionHandler(BadRequest.class)
+    @ExceptionHandler(HttpClientErrorException.BadRequest.class)
     public final ResponseEntity<Object> handleBadRequest(Exception ex, WebRequest request)
     {
         ErrorDetails error = new ErrorDetails(new Date(),"The parameter contains bad stuff, very technical", ex.getMessage());

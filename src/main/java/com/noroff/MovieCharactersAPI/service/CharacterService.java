@@ -51,20 +51,15 @@ public class CharacterService {
         }
         characterRepository.delete(actorCharacter);
 
-        //check if found
-
         return ResponseEntity.ok().body(actorCharacter);
 
     }
 
     //Update character
-    public ResponseEntity<ActorCharacter> updateCharacter(ActorCharacter character, Long id) throws NoItemFoundException{
-        //ActorCharacter oldCharacter = characterRepository.findById(id).orElseThrow(()-> new NoItemFoundException("No character by id " + id));
-
-        ActorCharacter updatedCharacter = character;
-        updatedCharacter.setId(id);
-        characterRepository.save(updatedCharacter);
-        return ResponseEntity.ok().body(updatedCharacter);
+    public ResponseEntity<ActorCharacter> updateCharacter(ActorCharacter character, Long id){
+        character.setId(id);
+        characterRepository.save(character);
+        return ResponseEntity.ok().body(character);
     }
 
     //Special query 2: Extract characters from movie

@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MovieCharactersApiApplication {
 
 	/**
-	 * TODO: CUSTOM EXCEPTION?
 	 * TODO: UPLOAD DB AND APP ON HEROKU - FELLES
 	 */
 
