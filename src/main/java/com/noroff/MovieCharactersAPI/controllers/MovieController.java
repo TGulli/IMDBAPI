@@ -26,19 +26,14 @@ public class MovieController {
         return movieService.getAllMovies();
     }
 
-<<<<<<< HEAD
+
     /* A method to create a new Movie object and add it to the database. */
-=======
->>>>>>> 0f9ad8e0f66b73f1ec41d3e57a07a8964915f2ee
     @PostMapping("/add")
     public Movie addMovie(@RequestBody Movie movie) {
         return movieService.createNewMovie(movie);
     }
 
-<<<<<<< HEAD
      /* A method to return a specific movie by its id. */
-=======
->>>>>>> 0f9ad8e0f66b73f1ec41d3e57a07a8964915f2ee
     @GetMapping("/get/{id}")
     public ResponseEntity<Movie> getById(@PathVariable(value = "id") long id) throws NoItemFoundException {
         /*
