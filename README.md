@@ -8,7 +8,11 @@ they belong to. The REST API is used to interact and manipulate the data.
 Hiba Benhaida, Thomas Gulli, Bjørnar Pedersen and Amalie Hunsbedt
 
 ### Heroku page
-link.... :)
+http://pretendmdb.herokuapp.com/
+
+For swagger:
+http://pretendmdb.herokuapp.com/index.html
+
 
 ### Motivation
 This project was made as an assignment during the Experis Academy Java Fullstack course.
@@ -58,8 +62,49 @@ public class CharacterController {
 ```
 
 ### Project tree
-
-
+```bash
++---.idea
+|   \---libraries
++---.mvn
+|   \---wrapper
++---src
+|   +---main
+|   |   +---java
+|   |   |   \---com
+|   |   |       \---noroff
+|   |   |           \---MovieCharactersAPI
+|   |   |               +---controllers
+|   |   |               +---exceptions
+|   |   |               +---models
+|   |   |               +---repositories
+|   |   |               \---service
+|   |   \---resources
+|   |       +---static
+|   |       \---templates
+|   \---test
+|       \---java
+|           \---com
+|               \---noroff
+|                   \---MovieCharactersAPI
+\---target
+    +---classes
+    |   \---com
+    |       \---noroff
+    |           \---MovieCharactersAPI
+    |               +---controllers
+    |               +---exceptions
+    |               +---models
+    |               +---repositories
+    |               \---service
+    +---generated-sources
+    |   \---annotations
+    +---generated-test-sources
+    |   \---test-annotations
+    \---test-classes
+        \---com
+            \---noroff
+                \---MovieCharactersAPI
+```
 
 ### Credits
 Thanks to Nicholas Lennox for great guidance!
