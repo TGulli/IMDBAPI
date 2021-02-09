@@ -401,6 +401,29 @@
 						"description": "Get all movies"
 					},
 					"response": []
+				},
+				{
+					"name": "Get all characters in movie 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/character/all-from-movie/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"character",
+								"all-from-movie",
+								"1"
+							]
+						},
+						"description": "Get all movies"
+					},
+					"response": []
 				}
 			]
 		},
@@ -594,6 +617,52 @@
 								"v1",
 								"franchise",
 								"get",
+								"1"
+							]
+						},
+						"description": "Get all franchise"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all characters from farnchies 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/character/all-from-franchise/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"character",
+								"all-from-franchise",
+								"1"
+							]
+						},
+						"description": "Get all franchise"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all movies from farnchies 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/movie/franchise/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"movie",
+								"franchise",
 								"1"
 							]
 						},
