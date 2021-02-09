@@ -44,27 +44,20 @@ public class MovieService {
 
     //Update
     public ResponseEntity<Movie> updateMovie(Movie movie, Long movie_id) throws NoItemFoundException{
-        Movie oldMovie = movieRepository.findById(movie_id).orElseThrow(()-> new NoItemFoundException("No movie by id " + movie_id));
+        Movie updatedMovie = movieRepository.findById(movie_id).orElseThrow(()-> new NoItemFoundException("No movie by id " + movie_id));
 
-       /* ---- GOAL (?) ----
-        Movie updatedMovie = movie;
-        updatedMovie.setMovie_id(movie_id);
-        movieRepository.save(updatedMovie);
-        return HttpStatus.ACCEPTED;
-        */
+        updatedMovie.setTitle(movie.getTitle());
+        updatedMovie.setGenre(movie.getGenre());
+        updatedMovie.setYear(movie.getYear());
+        updatedMovie.setDirector(movie.getDirector());
+        updatedMovie.setPicture(movie.getPicture());
+        updatedMovie.setTrailer(movie.getTrailer());
 
-        oldMovie.setTitle(movie.getTitle());
-        oldMovie.setGenre(movie.getGenre());
-        oldMovie.setYear(movie.getYear());
-        oldMovie.setDirector(movie.getDirector());
-        oldMovie.setPicture(movie.getPicture());
-        oldMovie.setTrailer(movie.getTrailer());
+        updatedMovie.setCharacters(movie.getCharacters());
 
-        oldMovie.setCharacters(movie.getCharacters());
+        Movie returnMovie = movieRepository.save(updatedMovie);
 
-        Movie returnMovie = movieRepository.save(oldMovie);
-
-        if(returnMovie == oldMovie){
+        if(returnMovie == updatedMovie){
             return ResponseEntity.ok().body(returnMovie);
         }
         else {
