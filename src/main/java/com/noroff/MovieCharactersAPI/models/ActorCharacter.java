@@ -3,6 +3,9 @@ package com.noroff.MovieCharactersAPI.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,13 +21,14 @@ public class ActorCharacter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long character_id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "alias")
     private String alias;
 
     @Column(name = "gender")
+    @NotBlank(message = "NOT EMPTY PLZ")
     private String gender;
 
     @Column(name = "picture")
