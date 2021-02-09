@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "62789185-af9c-498d-8f94-d17af59a15f5",
+		"_postman_id": "3c7c7d5a-a6bc-4d18-bf52-7cec92b795da",
 		"name": "Test IMDB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,11 +14,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/character/getAll",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/getAll",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -45,11 +47,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/character/add",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/add",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -67,11 +71,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/character/get/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/get/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -90,11 +96,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/character/delete/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/delete/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -122,11 +130,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/character/add",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/add",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -153,11 +163,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/character/update/2",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/update/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -176,11 +188,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/character/getAll",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/getAll",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -204,11 +218,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/movie/getAll",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/movie/getAll",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -235,11 +251,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/movie/add",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/movie/add",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -257,11 +275,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/movie/get/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/movie/get/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -280,11 +300,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/character/delete/2",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/delete/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -303,11 +325,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/movie/getAll",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/movie/getAll",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -333,11 +357,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/character/add",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/add",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -364,11 +390,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/movie/update/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/movie/update/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -386,11 +414,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/movie/getAll",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/movie/getAll",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -408,11 +438,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/character/all-from-movie/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/all-from-movie/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -436,11 +468,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/franchise/getAll",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/franchise/getAll",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -467,11 +501,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/franchise/add",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/franchise/add",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -498,11 +534,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/franchise/update/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/franchise/update/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -521,11 +559,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/franchise/get/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/franchise/get/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -553,11 +593,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/movie/update/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/movie/update/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -584,11 +626,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/character/update/3",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/update/3",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -607,11 +651,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/franchise/get/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/franchise/get/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -630,11 +676,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/character/all-from-franchise/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/all-from-franchise/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -653,11 +701,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/movie/franchise/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/movie/franchise/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -676,11 +726,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/character/delete/3",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/character/delete/3",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -699,11 +751,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/franchise/get/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/franchise/get/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -722,11 +776,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/movie/delete/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/movie/delete/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -745,11 +801,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/franchise/get/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/franchise/get/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -768,11 +826,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/franchise/delete/1",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/franchise/delete/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -791,11 +851,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/franchise/getAll",
+							"raw": "https://pretendmdb.herokuapp.com/api/v1/franchise/getAll",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"pretendmdb",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
