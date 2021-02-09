@@ -3,28 +3,33 @@ package com.noroff.MovieCharactersAPI.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
+
+/*
+A class for storing character information in ActorCharacter objects.
+The class is represented as a table with its variable names as columns in the database.
+*/
 
 @Entity
 @Table(name = "Character")
 public class ActorCharacter {
-    /*
-    A class for storing character information in ActorCharacter objects.
-    The class is represented as a table with its variable names as columns in the database.
-     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long character_id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "alias")
     private String alias;
 
     @Column(name = "gender")
+    @NotBlank(message = "NOT EMPTY PLZ")
     private String gender;
 
     @Column(name = "picture")

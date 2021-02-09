@@ -2,79 +2,64 @@ package com.noroff.MovieCharactersAPI.controllers;
 
 import com.noroff.MovieCharactersAPI.exceptions.NoItemFoundException;
 import com.noroff.MovieCharactersAPI.models.ActorCharacter;
-import com.noroff.MovieCharactersAPI.models.Movie;
-import com.noroff.MovieCharactersAPI.repositories.CharacterRepository;
+import com.noroff.MovieCharactersAPI.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/*
+The CharacterController class is responsible for making endpoints for characters,
+handling user interactions and deciding what to do with it.
+*/
+
 @RestController
 @RequestMapping("api/v1/character")
 public class CharacterController {
-    /*
-    The CharacterController class is responsible for making endpoints for characters,
-    handling user interactions and deciding what to do with it.
-     */
 
     @Autowired
-    private CharacterRepository characterRepository;
+    private CharacterService characterService;
 
-    @GetMapping
+    /* A method to returns all the characters in the database as ActorCharacter objects. */
+    @GetMapping("/getAll")
     public List<ActorCharacter> getAllCharacters(){
-        /*
-        A method to returns all the characters in the database
-        as ActorCharacter objects.
-         */
-        return this.characterRepository.findAll();
+        return characterService.getAllCharacters();
     }
 
-    @PostMapping
-    public ActorCharacter addCharacter(@RequestBody ActorCharacter character){
-        /*
-        A method to create a new ActorCharacter object and add it to the database.
-         */
-        return this.characterRepository.save(character);
+    /* A method to create a new ActorCharacter object and add it to the database. */
+    @PostMapping("/add")
+    public ResponseEntity<ActorCharacter> addCharacter(@RequestBody ActorCharacter character){
+        return characterService.createNewCharacter(character);
     }
 
-    @GetMapping("/{id}")
+    /* A method to return a specific character by its id.  */
+    @GetMapping("/get/{id}")
     public ResponseEntity<ActorCharacter> getById(@PathVariable(value = "id") long id) throws NoItemFoundException {
-        /*
-        A method to return a specific character by its id.
-         */
-        ActorCharacter actorCharacter = characterRepository.findById(id).orElseThrow(()-> new NoItemFoundException("No character by id " + id));
-        return ResponseEntity.ok().body(actorCharacter);
+        return characterService.getCharacterById(id);
     }
 
-    @DeleteMapping("/{id}")
+    /* A method to delete a specific character and all its relationships in the database. */
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<ActorCharacter> deleteById(@PathVariable(value = "id") long id) throws NoItemFoundException {
-        /*
-        A method to delete a specific character and all its relationships in the database.
-         */
-        ActorCharacter actorCharacter = characterRepository.findById(id).orElseThrow(()-> new NoItemFoundException("No character by id " + id));
-        List<Movie> movies = actorCharacter.getMovies();
-        for (Movie m: movies) {
-            m.getCharacters().remove(actorCharacter);
-        }
-        characterRepository.delete(actorCharacter);
-        return ResponseEntity.ok().body(actorCharacter);
+        return characterService.deleteCharacter(id);
     }
 
-    @PutMapping("/{charid}")
-    public ResponseEntity<ActorCharacter> update(@RequestBody ActorCharacter character, @PathVariable("charid") long charid) throws NoItemFoundException {
-        /*
-        A method to update a specific character and all its relationships in the database.
-         */
-        ActorCharacter oldCharacter = characterRepository.findById(charid).orElseThrow(()-> new NoItemFoundException("No character by id " + character.getId()));
+    /* A method to update a specific character in the database. */
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ActorCharacter> update(@RequestBody ActorCharacter character, @PathVariable("id") long id) throws NoItemFoundException {
+        return characterService.updateCharacter(character, id);
+    }
 
-        oldCharacter.setMovies(character.getMovies());
-        oldCharacter.setName(character.getName());
-        oldCharacter.setAlias(character.getAlias());
-        oldCharacter.setGender(character.getGender());
-        oldCharacter.setPicture(character.getPicture());
+    /* A method that returns all characters in a movie */
+    @GetMapping("/all-from-movie/{movieid}")
+    public ResponseEntity<List<ActorCharacter>> movieCharacters(@PathVariable("movieid") long movieid) throws NoItemFoundException {
+        return characterService.extractCharactersFromMovie(movieid);
+    }
 
-        characterRepository.save(oldCharacter);
-        return ResponseEntity.ok().body(oldCharacter);
+    /* A method that returns all franchises in a franchise */
+    @GetMapping("/all-from-franchise/{franchiseid}")
+    public ResponseEntity<List<ActorCharacter>> franchiseCharacters(@PathVariable("franchiseid") long franchiseid) throws NoItemFoundException{
+        return characterService.extractCharactersFromFranchise(franchiseid);
     }
 }

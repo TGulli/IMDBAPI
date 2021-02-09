@@ -7,15 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MovieCharactersApiApplication {
 
 	/**
-	 * TODO: MAYBE LOOK AT SERVICE INSTEAD OF REPOSITORY <-- BIG MAYBE
-	 * TODO: EXCEPTIONHANDLING FOR THE REST OF THE METHODS
-	 * TODO: SWAGGER/OPENAI
-	 * TODO: UPLOAD DB AND APP ON HEROKU
+	 * TODO: UPLOAD DB AND APP ON HEROKU - FELLES
 	 */
 
 
 	public static void main(String[] args) {
-		//Hello from Git!
+
 		SpringApplication.run(MovieCharactersApiApplication.class, args);
 		//Test, ser dere dette her?
 		// Ja :)
